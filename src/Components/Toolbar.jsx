@@ -1,49 +1,66 @@
 import styled from "styled-components";
 
-const myDivCSS = styled.div`
-  border: 1px solid blue;
+const NavbarCSS = styled.div`
+  background: ${(props) => props.background};
+  border: 1px solid red;
+  width: 800px;
+  height: 50px;
+  margin: auto;
   display: flex;
-
-  gap: 100px;
-`;
-
-const SiteNameCSS = styled.div`
+  flex-direction: row-reverse;
+  gap: 10px;
   > * {
   }
 `;
+const Navbar = ({ children, background }) => {
+  return <NavbarCSS background={background}>{children}</NavbarCSS>;
+};
 
-const DrawerItemCSS = styled.div`
-  width: 150px;
-  border: 2px solid green;
-  /* background:  */
-  /* margin: auto; */
-  height: 20px;
-  padding: 10px;
-  float: ${(props) => props.floating};
-  /* display: flex; */
+const NavElementCSS = styled.div`
+  cursor: pointer;
+  color: #ffffff;
+  position: relative;
+  top: 3px;
+  /* left: 5px; */
+  /* right: 5px; */
+  /* border: 1px solid green; */
+  width: auto;
+  height: 25px;
+  padding: 8px;
+  font-size: 20px;
+  float: ${(props) => (props.float === "right" ? "right" : "left")};
+  /* background: yellow; */
+  :hover {
+    color: black;
+  }
+`;
+const NavElement = ({ children, floating }) => {
+  return <NavElementCSS float={floating}>{children}</NavElementCSS>;
+};
+
+const SitenameCSS = styled.img`
+  width: 120px;
+  height: 35px;
+  margin-right: 199px;
+  position: relative;
+  top: 8px;
 `;
 
-const DrawerItem = ({ label }) => {
-  return <DrawerItemCSS>{label}</DrawerItemCSS>;
-};
-const myDiv = () => {
-  return <myDivCSS>Hello</myDivCSS>;
-};
-const SiteName = ({ label }) => {
-  return <SiteNameCSS>{label}</SiteNameCSS>;
+const Sitename = ({ src, alt }) => {
+  return <SitenameCSS src={src} alt={alt}></SitenameCSS>;
 };
 
 function Toolbar() {
   return (
     <>
-      <myDiv style={{ display: "flex", background: "blue", color: "#ffffff" }}>
-        <SiteName label="Site Name"></SiteName>
-        <DrawerItem floating="right" label="About us" />
-        <DrawerItem floating="right" label="Prices" />
-        <DrawerItem floating="right" label="Start Page" />
-        <DrawerItem floating="right" label="Offer" />
-        <DrawerItem floating="right" label="Contact" />
-      </myDiv>
+      <Navbar background="blue">
+        <NavElement floating="right">Contact</NavElement>
+        <NavElement floating="right">Offer</NavElement>
+        <NavElement floating="right">Start page</NavElement>
+        <NavElement floating="right">Prices</NavElement>
+        <NavElement floating="right">About us</NavElement>
+        <Sitename src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0BCBYoCFM8olP4Uv3C6jQEnvxZfwdXRI9kg&usqp=CAU"></Sitename>
+      </Navbar>
     </>
   );
 }
